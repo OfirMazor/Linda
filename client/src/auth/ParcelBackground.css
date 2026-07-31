@@ -1,0 +1,75 @@
+.parcel-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.parcel-scroll-layer {
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  animation: fly-northeast 60s linear infinite;
+}
+
+.parcel-bg-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.9;
+}
+
+@keyframes fly-northeast {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(33.33%, -33.33%);
+  }
+}
+
+/* Parcel flash animation - rapid flashes across the map */
+.parcel-flash {
+  animation: flash-parcel 6s ease-in-out infinite;
+}
+
+.flash-1 { animation-delay: 0s; }
+.flash-2 { animation-delay: 0.5s; }
+.flash-3 { animation-delay: 1.0s; }
+.flash-4 { animation-delay: 1.5s; }
+.flash-5 { animation-delay: 2.0s; }
+.flash-6 { animation-delay: 2.5s; }
+.flash-7 { animation-delay: 3.0s; }
+.flash-8 { animation-delay: 3.5s; }
+.flash-9 { animation-delay: 4.0s; }
+.flash-10 { animation-delay: 4.5s; }
+.flash-11 { animation-delay: 5.0s; }
+.flash-12 { animation-delay: 5.5s; }
+
+@keyframes flash-parcel {
+  0%, 5% { fill: transparent; }
+  8% { fill: rgba(250, 230, 80, 0.5); stroke: rgba(255, 240, 100, 0.95); }
+  13% { fill: rgba(250, 230, 80, 0.25); stroke: rgba(255, 240, 100, 0.6); }
+  18%, 100% { fill: transparent; }
+}
+
+/* Vignette overlay to keep center login card readable */
+.parcel-vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse 70% 70% at 50% 50%,
+    rgba(15, 23, 42, 0.4) 0%,
+    rgba(15, 23, 42, 0.7) 55%,
+    rgba(15, 23, 42, 0.92) 100%
+  );
+}

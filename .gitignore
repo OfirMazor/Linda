@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+server/.env
+client/.env
+
+# Build output
+dist/
+client/dist/
+server/dist/
+
+# Runtime data & cache
+server/data/tabu-cache.json
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

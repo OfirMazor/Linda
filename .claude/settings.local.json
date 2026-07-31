@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:\\\\Users\\\\ofirm\\\\.linda-local\" 2>/dev/null && echo \"---EXISTS---\")",
+      "Read(//c/Users/ofirm/.linda-local/**)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(start http://localhost:5173)",
+      "Bash(npm install *)",
+      "Bash(taskkill //F //FI \"IMAGENAME eq node.exe\" //FI \"PID ne 0\")",
+      "Bash(timeout 10 bash -c 'while ! curl -s http://localhost:5173 > /dev/null 2>&1; do sleep 1; done && echo \"ready\"')",
+      "Bash(curl -s \"https://data.gov.il/api/3/action/datastore_search?resource_id=a1a91496-d692-4420-bc21-3487600b71a5&limit=10&offset=500\")",
+      "Bash(python -m json.tool)",
+      "Bash(cmd.exe /c \"start /b npm run dev\")",
+      "Bash(node -e ' *)",
+      "Bash(npx vite *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\ofirm\\.linda-local\\client\\src\\auth"
+    ]
+  }
+}

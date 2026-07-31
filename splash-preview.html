@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Linda Splash Screen Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #1a1a1a;
+            font-family: sans-serif;
+        }
+
+        .splash-window {
+            width: 520px;
+            height: 260px;
+            background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #2563eb 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .linda-text-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .linda-text {
+            font-family: 'Sekuya', sans-serif;
+            font-size: 96px;
+            letter-spacing: 0.15em;
+            background: linear-gradient(90deg, #ff5e00, #ffaa00, #ffe600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .linda-text-stroke {
+            font-family: 'Sekuya', sans-serif;
+            font-size: 96px;
+            letter-spacing: 0.15em;
+            color: transparent;
+            -webkit-text-stroke: 8px rgba(0, 0, 0, 0.47);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .linda-text-glow {
+            font-family: 'Sekuya', sans-serif;
+            font-size: 96px;
+            letter-spacing: 0.15em;
+            background: linear-gradient(90deg, #fff5e0, #ffffff, #fffbe6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: absolute;
+            top: 0;
+            left: 0;
+            mask-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 30%,
+                white 45%,
+                white 55%,
+                transparent 70%,
+                transparent 100%
+            );
+            -webkit-mask-image: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 30%,
+                white 45%,
+                white 55%,
+                transparent 70%,
+                transparent 100%
+            );
+            mask-size: 300% 100%;
+            -webkit-mask-size: 300% 100%;
+            animation: sweep 2.2s ease-in-out infinite;
+            filter: brightness(1.5) drop-shadow(0 0 8px rgba(255, 200, 50, 0.6));
+        }
+
+        @keyframes sweep {
+            0% {
+                mask-position: 100% 0;
+                -webkit-mask-position: 100% 0;
+            }
+            100% {
+                mask-position: 0% 0;
+                -webkit-mask-position: 0% 0;
+            }
+        }
+
+        .subtitle {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            text-shadow:
+                -2px -2px 0 rgba(0,0,0,0.8),
+                2px -2px 0 rgba(0,0,0,0.8),
+                -2px 2px 0 rgba(0,0,0,0.8),
+                2px 2px 0 rgba(0,0,0,0.8);
+        }
+
+        .fade-demo {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            padding: 4px 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+        .fade-demo:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .splash-window.fading {
+            animation: fadeOut 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .note {
+            position: fixed;
+            bottom: 20px;
+            color: #666;
+            font-size: 13px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-window" id="splash">
+        <div class="linda-text-container">
+            <span class="linda-text-stroke">Linda</span>
+            <span class="linda-text">Linda</span>
+            <span class="linda-text-glow">Linda</span>
+        </div>
+        <div class="subtitle">Land Indicators for Parcel-Driven Insights</div>
+        <div class="fade-demo" onclick="document.getElementById('splash').classList.add('fading'); setTimeout(() => document.getElementById('splash').classList.remove('fading'), 1500)">
+            Click to preview fade-out
+        </div>
+    </div>
+    <div class="note">
+        HTML preview of the WPF splash. Actual implementation uses PowerShell + WPF (native Windows window).
+    </div>
+</body>
+</html>
