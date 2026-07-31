@@ -12,10 +12,13 @@ interface MapViewProps {
 
 type BasemapType = "roadmap" | "satellite";
 
+const GLYPHS_URL = "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf";
+
 function getStyle(basemap: BasemapType): maplibregl.StyleSpecification {
   if (basemap === "satellite") {
     return {
       version: 8,
+      glyphs: GLYPHS_URL,
       sources: {
         google: {
           type: "raster",
@@ -43,6 +46,7 @@ function getStyle(basemap: BasemapType): maplibregl.StyleSpecification {
 
   return {
     version: 8,
+    glyphs: GLYPHS_URL,
     sources: {
       google: {
         type: "raster",
@@ -226,7 +230,7 @@ export default function MapView({
             layout: {
               "text-field": ["to-string", ["get", labelProperty]],
               "text-size": 12,
-              "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+              "text-font": ["Open Sans Bold"],
               "text-anchor": "center",
               "text-allow-overlap": false,
               "text-optional": true,
@@ -349,7 +353,7 @@ export default function MapView({
           layout: {
             "text-field": ["to-string", ["get", labelProperty]],
             "text-size": 12,
-            "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+            "text-font": ["Open Sans Bold"],
             "text-anchor": "center",
             "text-allow-overlap": false,
             "text-optional": true,
