@@ -1,0 +1,56 @@
+.ownership-chart-layout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  padding: 0.5rem 0;
+}
+
+.ownership-legend-table-wrapper {
+  flex: 0 0 auto;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.ownership-ring-wrapper {
+  flex-shrink: 0;
+  width: 250px;
+  height: 300px;
+}
+
+.ownership-legend-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.ownership-legend-table th {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 2px solid var(--color-border);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.ownership-legend-table th:last-child {
+  text-align: right;
+}
+
+.ownership-legend-table td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--color-border);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ownership-legend-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ownership-legend-table tbody tr:hover {
+  background: var(--color-bg);
+}

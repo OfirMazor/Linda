@@ -1,9 +1,10 @@
 import { useMemo } from "react";
-import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import MapView from "../MapView/MapView";
 import Spinner from "../common/Spinner";
 import type { OwnershipType } from "../../types";
 import type { OwnershipData } from "../../hooks/useBlockMetrics";
+import "./OwnershipMetric.css";
 
 interface OwnershipMetricProps {
   data: OwnershipData | null;
@@ -80,28 +81,51 @@ export default function OwnershipMetric({ data, loading }: OwnershipMetricProps)
     features: geoJsonFeatures,
   };
 
+  const sortedData = [...chartData].sort((a, b) => b.value - a.value);
+
   return (
     <>
       <div className="metric-chart-pane">
-        <ResponsiveContainer width="100%" height={350}>
-          <PieChart>
-            <Pie
-              data={chartData}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={100}
-              dataKey="value"
-              stroke="none"
-            >
-              {chartData.map((entry, index) => (
-                <Cell key={index} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip formatter={(value: number) => value.toLocaleString()} />
-            <Legend />
-          </PieChart>
-        </ResponsiveContainer>
+        <div className="ownership-chart-layout">
+          <div className="ownership-legend-table-wrapper">
+            <table className="ownership-legend-table">
+              <thead>
+                <tr>
+                  <th>Ownership Type</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortedData.map((entry) => (
+                  <tr key={entry.name}>
+                    <td style={{ color: entry.color }}>{entry.name}</td>
+                    <td style={{ color: entry.color }}>{entry.value.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="ownership-ring-wrapper">
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={chartData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={100}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell key={index} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value: number) => value.toLocaleString()} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
       <div className="metric-map-pane">
         <MapView

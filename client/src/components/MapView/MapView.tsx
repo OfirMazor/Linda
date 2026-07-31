@@ -225,13 +225,16 @@ export default function MapView({
             source: "parcels",
             layout: {
               "text-field": ["to-string", ["get", labelProperty]],
-              "text-size": 11,
+              "text-size": 12,
+              "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
               "text-anchor": "center",
+              "text-allow-overlap": false,
+              "text-optional": true,
             },
             paint: {
-              "text-color": "#1e293b",
+              "text-color": "#000000",
               "text-halo-color": "#ffffff",
-              "text-halo-width": 1.5,
+              "text-halo-width": 2,
             },
           });
         }
@@ -345,13 +348,16 @@ export default function MapView({
           source: "parcels",
           layout: {
             "text-field": ["to-string", ["get", labelProperty]],
-            "text-size": 11,
+            "text-size": 12,
+            "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
             "text-anchor": "center",
+            "text-allow-overlap": false,
+            "text-optional": true,
           },
           paint: {
-            "text-color": "#1e293b",
+            "text-color": "#000000",
             "text-halo-color": "#ffffff",
-            "text-halo-width": 1.5,
+            "text-halo-width": 2,
           },
         });
       }
