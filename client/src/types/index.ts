@@ -32,6 +32,7 @@ export interface CadastreProcess {
   ProcessName: string;
   ProcessType: string;
   geometry: GeoJSON.Geometry | null;
+  approvalDate: string | null;
 }
 
 export interface PAIResult {

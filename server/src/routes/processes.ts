@@ -38,8 +38,15 @@ processesRouter.get("/:blockGlobalId", async (req, res) => {
           SELECT
             cp.ProcessName,
             cp.ProcessType,
-            cp.Shape.STAsText() AS geometryWKT
+            cp.Shape.STAsText() AS geometryWKT,
+            sd.ApprovalDate
           FROM PF.CadasterProcessBorders cp
+          LEFT JOIN (
+            SELECT CPBUniqueID, MAX(DateStatus) AS ApprovalDate
+            FROM PF.CPBStatusAndDates
+            WHERE Status IN (5, 6, 13, 103)
+            GROUP BY CPBUniqueID
+          ) sd ON cp.GlobalID = sd.CPBUniqueID
           WHERE cp.BlockUniqueID = @BlockGlobalID
             AND cp.Status IN (5, 6, 13, 103)
         `),
@@ -62,6 +69,7 @@ processesRouter.get("/:blockGlobalId", async (req, res) => {
       ProcessName: row.ProcessName,
       ProcessType: PROCESS_TYPE_NAMES[row.ProcessType] ?? String(row.ProcessType),
       geometry: row.geometryWKT ? wktToGeoJSON(row.geometryWKT) : null,
+      approvalDate: row.ApprovalDate ? new Date(row.ApprovalDate).toISOString() : null,
     }));
 
     res.json({ processes, blockGeometry });

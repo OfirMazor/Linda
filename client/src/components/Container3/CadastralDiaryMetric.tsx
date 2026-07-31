@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import MapView from "../MapView/MapView";
+import CadastralTimeline from "./CadastralTimeline";
 import Spinner from "../common/Spinner";
 import type { ProcessesData } from "../../hooks/useBlockMetrics";
 import "./CadastralDiaryMetric.css";
@@ -24,8 +25,8 @@ const PROCESS_COLORS = [
 export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMetricProps) {
   const [hiddenTypes, setHiddenTypes] = useState<Set<string>>(new Set());
 
-  const { chartData, geojson } = useMemo(() => {
-    if (!data) return { chartData: [], geojson: { type: "FeatureCollection" as const, features: [] } };
+  const { chartData, geojson, timelineProcesses, undatedProcesses } = useMemo(() => {
+    if (!data) return { chartData: [], geojson: { type: "FeatureCollection" as const, features: [] }, timelineProcesses: [], undatedProcesses: [] };
 
     const typeCounts = new Map<string, number>();
     data.processes.forEach((p) => {
@@ -72,9 +73,28 @@ export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMe
         });
       });
 
+    const dated = data.processes
+      .filter((p) => p.approvalDate)
+      .map((p) => ({
+        ProcessName: p.ProcessName,
+        ProcessType: p.ProcessType,
+        approvalDate: p.approvalDate!,
+        color: colors.get(p.ProcessType) || "#6b7280",
+      }));
+
+    const undated = data.processes
+      .filter((p) => !p.approvalDate)
+      .map((p) => ({
+        ProcessName: p.ProcessName,
+        ProcessType: p.ProcessType,
+        color: colors.get(p.ProcessType) || "#6b7280",
+      }));
+
     return {
       chartData: chart,
       geojson: { type: "FeatureCollection" as const, features },
+      timelineProcesses: dated,
+      undatedProcesses: undated,
     };
   }, [data]);
 
@@ -133,6 +153,12 @@ export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMe
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr className="diary-legend-total">
+                  <td>Total</td>
+                  <td>{sortedData.reduce((sum, e) => sum + e.value, 0).toLocaleString()}</td>
+                </tr>
+              </tfoot>
             </table>
           </div>
           <div className="diary-ring-wrapper">
@@ -156,6 +182,10 @@ export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMe
             </ResponsiveContainer>
           </div>
         </div>
+        <CadastralTimeline
+          processes={timelineProcesses}
+          undatedProcesses={undatedProcesses}
+        />
       </div>
       <div className="metric-map-pane">
         <MapView geojson={filteredGeojson} colorProperty="color" outlineOnly />

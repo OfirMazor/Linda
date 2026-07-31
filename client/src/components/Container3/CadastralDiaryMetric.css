@@ -55,6 +55,19 @@
   background: var(--color-bg);
 }
 
+.diary-legend-total td {
+  padding: 0.5rem 0.6rem;
+  border-top: 2px solid var(--color-border);
+  border-bottom: none;
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.diary-legend-total td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 .diary-layer-control {
   position: absolute;
   top: 10px;

@@ -187,9 +187,11 @@ export default function MapView({
             source: "parcels",
             filter: ["==", ["get", "_type"], "process"],
             layout: {
-              "text-field": ["get", "ProcessName"],
+              "text-field": ["get", "processName"],
+              "text-font": ["Open Sans Bold"],
               "text-size": 12,
               "text-anchor": "center",
+              "symbol-placement": "point",
               "text-allow-overlap": false,
               "text-ignore-placement": false,
               "text-optional": true,
@@ -197,7 +199,7 @@ export default function MapView({
             paint: {
               "text-color": ["get", colorProperty],
               "text-halo-color": "#ffffff",
-              "text-halo-width": 1.5,
+              "text-halo-width": 2,
             },
           });
         } else {
@@ -317,9 +319,11 @@ export default function MapView({
           source: "parcels",
           filter: ["==", ["get", "_type"], "process"],
           layout: {
-            "text-field": ["get", "ProcessName"],
+            "text-field": ["get", "processName"],
+            "text-font": ["Open Sans Bold"],
             "text-size": 12,
             "text-anchor": "center",
+            "symbol-placement": "point",
             "text-allow-overlap": false,
             "text-ignore-placement": false,
             "text-optional": true,
@@ -327,7 +331,7 @@ export default function MapView({
           paint: {
             "text-color": ["get", colorProperty],
             "text-halo-color": "#ffffff",
-            "text-halo-width": 1.5,
+            "text-halo-width": 2,
           },
         });
       } else {
