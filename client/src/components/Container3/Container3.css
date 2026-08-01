@@ -84,6 +84,7 @@
   border-right: 1px solid var(--color-border);
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .metric-map-pane {
