@@ -1,5 +1,4 @@
 import { useState, useMemo } from "react";
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import MapView from "../MapView/MapView";
 import CadastralTimeline from "./CadastralTimeline";
 import Spinner from "../common/Spinner";
@@ -165,31 +164,11 @@ export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMe
               </tfoot>
             </table>
           </div>
-          <div className="diary-ring-wrapper">
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  dataKey="value"
-                  stroke="none"
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={index} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip formatter={(value: number) => value.toLocaleString()} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          <CadastralTimeline
+            processes={timelineProcesses}
+            undatedProcesses={undatedProcesses}
+          />
         </div>
-        <CadastralTimeline
-          processes={timelineProcesses}
-          undatedProcesses={undatedProcesses}
-        />
       </div>
       <div className="metric-map-pane">
         <MapView geojson={filteredGeojson} colorProperty="color" outlineOnly />

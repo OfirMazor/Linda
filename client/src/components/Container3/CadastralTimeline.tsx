@@ -25,33 +25,20 @@ export default function CadastralTimeline({
 }: CadastralTimelineProps) {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
-  const { parsed, typeOffsets } = useMemo(() => {
-    if (processes.length === 0) {
-      return { parsed: [], typeOffsets: new Map<string, number>() };
-    }
-
-    const sorted = processes
+  const parsed = useMemo(() => {
+    if (processes.length === 0) return [];
+    return processes
       .map((p) => ({ ...p, date: new Date(p.approvalDate) }))
       .sort((a, b) => a.date.getTime() - b.date.getTime());
-
-    const offsets = new Map<string, number>();
-    let idx = 0;
-    sorted.forEach((p) => {
-      if (!offsets.has(p.ProcessType)) {
-        offsets.set(p.ProcessType, idx++);
-      }
-    });
-
-    return { parsed: sorted, typeOffsets: offsets };
   }, [processes]);
 
-  if (processes.length === 0 && undatedProcesses.length === 0) {
+  if (parsed.length === 0 && undatedProcesses.length === 0) {
     return null;
   }
 
-  if (processes.length === 0) {
+  if (parsed.length === 0) {
     return (
-      <div className="timeline-section">
+      <div className="timeline-wrapper">
         <div className="timeline-undated">
           {undatedProcesses.length} תהליכים ללא תאריך אישור:{" "}
           {undatedProcesses.map((p) => p.ProcessName).join(", ")}
@@ -60,62 +47,70 @@ export default function CadastralTimeline({
     );
   }
 
-  const padding = 8;
-  const getLeft = (index: number) => {
-    if (parsed.length === 1) return 50;
-    return padding + (index / (parsed.length - 1)) * (100 - padding * 2);
-  };
+  const itemsPerRow = 3;
+  const rowCount = Math.ceil(parsed.length / itemsPerRow);
 
-  const getTop = (processType: string) => {
-    const i = typeOffsets.get(processType) ?? 0;
-    return 20 + (i % 3) * 18;
-  };
+  const rows: (typeof parsed)[] = [];
+  for (let r = 0; r < rowCount; r++) {
+    const start = r * itemsPerRow;
+    const row = parsed.slice(start, start + itemsPerRow);
+    if (r % 2 === 1) row.reverse();
+    rows.push(row);
+  }
 
   return (
-    <div className="timeline-section">
-      <div className="timeline-container">
-        <div className="timeline-scroll-area">
-          <div className="timeline-axis" />
-
-          {parsed.map((p, i) => (
-            <div
-              key={i}
-              className="timeline-dot"
-              style={{
-                left: `${getLeft(i)}%`,
-                top: `${getTop(p.ProcessType)}px`,
-                backgroundColor: p.color,
-              }}
-              onMouseEnter={() => setHoveredIdx(i)}
-              onMouseLeave={() => setHoveredIdx(null)}
-            >
-              {hoveredIdx === i && (
-                <div className="timeline-tooltip">
-                  <strong>{p.ProcessName}</strong>
-                  {p.ProcessType}
-                  <br />
-                  {p.date.toLocaleDateString("he-IL", {
-                    month: "long",
-                    year: "numeric",
-                  })}
+    <div className="timeline-wrapper">
+      <div className="timeline-snake">
+        {rows.map((row, rowIdx) => (
+          <div
+            key={rowIdx}
+            className={`timeline-row ${rowIdx % 2 === 1 ? "timeline-row--reverse" : ""}`}
+          >
+            {row.map((p, colIdx) => {
+              const globalIdx = rowIdx % 2 === 1
+                ? rowIdx * itemsPerRow + (row.length - 1 - colIdx)
+                : rowIdx * itemsPerRow + colIdx;
+              return (
+                <div
+                  key={globalIdx}
+                  className="timeline-node"
+                  onMouseEnter={() => setHoveredIdx(globalIdx)}
+                  onMouseLeave={() => setHoveredIdx(null)}
+                >
+                  <div
+                    className="timeline-node-dot"
+                    style={{ backgroundColor: p.color }}
+                  />
+                  <div className="timeline-node-label" style={{ color: p.color }}>
+                    {p.ProcessName}
+                  </div>
+                  <div className="timeline-node-date">
+                    {p.date.toLocaleDateString("he-IL", {
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </div>
+                  {hoveredIdx === globalIdx && (
+                    <div className="timeline-node-tooltip">
+                      <strong>{p.ProcessName}</strong>
+                      <span>{p.ProcessType}</span>
+                      <span>
+                        {p.date.toLocaleDateString("he-IL", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
-
-          {parsed.map((p, i) => (
-            <div
-              key={`label-${i}`}
-              className="timeline-date-label"
-              style={{ left: `${getLeft(i)}%` }}
-            >
-              {p.date.toLocaleDateString("he-IL", {
-                month: "short",
-                year: "2-digit",
-              })}
-            </div>
-          ))}
-        </div>
+              );
+            })}
+            {rowIdx < rowCount - 1 && (
+              <div className="timeline-row-connector" />
+            )}
+          </div>
+        ))}
       </div>
 
       {undatedProcesses.length > 0 && (
