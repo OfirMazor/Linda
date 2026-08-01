@@ -87,6 +87,12 @@
   min-width: 0;
 }
 
+.metric-info-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
 .metric-map-pane {
   position: relative;
   min-height: 450px;

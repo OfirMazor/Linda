@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import MapView from "../MapView/MapView";
 import Spinner from "../common/Spinner";
+import InfoTooltip from "../common/InfoTooltip";
 import type { OwnershipType } from "../../types";
 import type { OwnershipData } from "../../hooks/useBlockMetrics";
 import "./OwnershipMetric.css";
@@ -86,6 +87,9 @@ export default function OwnershipMetric({ data, loading }: OwnershipMetricProps)
   return (
     <>
       <div className="metric-chart-pane">
+        <div className="metric-info-header">
+          <InfoTooltip text="Ownership Metric: Shows the distribution of land ownership types (Governmental, Private, Mixed, Other, Unknown) across all parcels in the selected block. Use this to identify public vs. private land balance, detect parcels with unclear ownership status, and assess the block's composition for planning, regulation, or transfer decisions." />
+        </div>
         <div className="ownership-chart-layout">
           <div className="ownership-legend-table-wrapper">
             <table className="ownership-legend-table">

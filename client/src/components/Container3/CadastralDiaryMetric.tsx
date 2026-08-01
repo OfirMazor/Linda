@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import MapView from "../MapView/MapView";
 import CadastralTimeline from "./CadastralTimeline";
 import Spinner from "../common/Spinner";
+import InfoTooltip from "../common/InfoTooltip";
 import type { ProcessesData } from "../../hooks/useBlockMetrics";
 import "./CadastralDiaryMetric.css";
 
@@ -136,6 +137,9 @@ export default function CadastralDiaryMetric({ data, loading }: CadastralDiaryMe
   return (
     <>
       <div className="metric-chart-pane">
+        <div className="metric-info-header">
+          <InfoTooltip text="Cadastral Diary: Displays all registered cadastral processes (subdivisions, consolidations, corrections, etc.) within the selected block. Reveals the block's transformation history — how parcels were created, merged, or modified over time. Use this to understand planning activity, identify areas undergoing frequent changes, and trace the legal history of land boundaries." />
+        </div>
         <div className="diary-chart-layout">
           <div className="diary-legend-table-wrapper">
             <table className="diary-legend-table">

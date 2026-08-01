@@ -10,6 +10,7 @@ import {
 } from "recharts";
 import MapView from "../MapView/MapView";
 import Spinner from "../common/Spinner";
+import InfoTooltip from "../common/InfoTooltip";
 import type { PAIResult } from "../../types";
 import "./PAIMetric.css";
 
@@ -89,6 +90,9 @@ export default function PAIMetric({ data, loading }: PAIMetricProps) {
   return (
     <>
       <div className="metric-chart-pane">
+        <div className="metric-info-header">
+          <InfoTooltip text="Parcel Accuracy Index (PAI): Measures the spatial precision of each parcel's boundaries based on the classification of its surveyed border points. Lower values indicate higher accuracy (class 1 = precise survey), while higher values indicate lower accuracy (class 4 = estimated/unknown). Use this to identify parcels that may require re-surveying, prioritize field work, and assess overall boundary reliability within the block." />
+        </div>
         <div className="pai-legend">
           <span className="pai-legend-label">High Accuracy</span>
           <div className="pai-gradient" />
