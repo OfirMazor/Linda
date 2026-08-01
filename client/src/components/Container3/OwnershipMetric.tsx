@@ -83,6 +83,42 @@ export default function OwnershipMetric({ data, loading }: OwnershipMetricProps)
   };
 
   const sortedData = [...chartData].sort((a, b) => b.value - a.value);
+  const total = chartData.reduce((sum, d) => sum + d.value, 0);
+
+  const renderLabel = ({
+    cx,
+    cy,
+    midAngle,
+    outerRadius,
+    index,
+  }: {
+    cx: number;
+    cy: number;
+    midAngle: number;
+    outerRadius: number;
+    index: number;
+  }) => {
+    const entry = chartData[index];
+    if (!entry) return null;
+    const percent = ((entry.value / total) * 100).toFixed(0);
+    const RADIAN = Math.PI / 180;
+    const radius = outerRadius + 20;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    return (
+      <text
+        x={x}
+        y={y}
+        fill={entry.color}
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+        fontSize={12}
+        fontWeight={600}
+      >
+        {percent}%
+      </text>
+    );
+  };
 
   return (
     <>
@@ -120,6 +156,8 @@ export default function OwnershipMetric({ data, loading }: OwnershipMetricProps)
                   outerRadius={100}
                   dataKey="value"
                   stroke="none"
+                  label={renderLabel}
+                  labelLine={false}
                 >
                   {chartData.map((entry, index) => (
                     <Cell key={index} fill={entry.color} />
