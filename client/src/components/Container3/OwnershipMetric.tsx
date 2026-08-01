@@ -13,10 +13,10 @@ interface OwnershipMetricProps {
 }
 
 const OWNERSHIP_COLORS: Record<OwnershipType, string> = {
-  Governmental: "#1e40af",
-  Private: "#059669",
-  Mixed: "#d97706",
-  Other: "#7c3aed",
+  Governmental: "#1a3db8",
+  Private: "#d4a017",
+  Mixed: "#16a34a",
+  Other: "#b49fdc",
   Unknown: "#9ca3af",
 };
 
