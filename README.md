@@ -1,9 +1,6 @@
 <p align="center">
-  <img src="docs/images/Survey of Israel logo.jpg" alt="Survey of Israel" width="120" />
+  <img src="docs/images/linda-logo.svg" alt="Linda — Land Indicators for Parcel-Driven Insights" width="400" />
 </p>
-
-<h1 align="center">Linda</h1>
-<p align="center"><strong>Land Indicators for Parcel-Driven Insights</strong></p>
 
 <p align="center">
   A single-page cadastral analytics dashboard built by the National Cadaster Department<br/>
