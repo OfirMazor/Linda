@@ -115,3 +115,12 @@ Server requires `server/.env` (see `.env.example` at root):
 ## Specification
 
 Full requirements in `docs/Specification & Documentation-Linda.docx` (binary .docx — read with `python-docx` if needed).
+
+## Apply changes
+
+Whenever the app’s build command is executed—whether manually by me or independently by the Claude agent—the following steps must always be performed:
+1.Build the application using the development/source files.
+2.Update the client files (the dist folder) with the results of the build.
+3.Commit and push all changes to the Git repository on the Agent branch.
+
+The custom build command should execute these steps automatically without asking for my permission or confirmation each time.

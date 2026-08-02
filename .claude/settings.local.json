@@ -13,7 +13,10 @@
       "Bash(python -m json.tool)",
       "Bash(cmd.exe /c \"start /b npm run dev\")",
       "Bash(node -e ' *)",
-      "Bash(npx vite *)"
+      "Bash(npx vite *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git mv *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\ofirm\\.linda-local\\client\\src\\auth"
