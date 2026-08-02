@@ -60,8 +60,16 @@ export default function CadastralTimeline({
     return (
       <div className="timeline-wrapper">
         <div className="timeline-undated">
-          {undatedProcesses.length} processes without approval date:{" "}
-          {undatedProcesses.map((p) => p.ProcessName).join(", ")}
+          <div className="timeline-undated-title">
+            {undatedProcesses.length} processes without approval date:
+          </div>
+          <ul className="timeline-undated-list">
+            {undatedProcesses.map((p, i) => (
+              <li key={i} style={{ color: p.color }}>
+                {p.ProcessName}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );
@@ -124,8 +132,16 @@ export default function CadastralTimeline({
 
       {undatedProcesses.length > 0 && (
         <div className="timeline-undated">
-          {undatedProcesses.length} processes without approval date:{" "}
-          {undatedProcesses.map((p) => p.ProcessName).join(", ")}
+          <div className="timeline-undated-title">
+            {undatedProcesses.length} processes without approval date:
+          </div>
+          <ul className="timeline-undated-list">
+            {undatedProcesses.map((p, i) => (
+              <li key={i} style={{ color: p.color }}>
+                {p.ProcessName}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

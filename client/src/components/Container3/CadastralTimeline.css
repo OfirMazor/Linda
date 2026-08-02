@@ -125,9 +125,27 @@
 
 .timeline-undated {
   margin-top: 0.75rem;
-  font-size: 0.7rem;
+  font-size: 0.77rem;
   color: var(--color-text-muted);
   line-height: 1.5;
   padding-top: 0.5rem;
   border-top: 1px solid var(--color-border);
+}
+
+.timeline-undated-title {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.timeline-undated-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.timeline-undated-list li {
+  font-weight: 600;
 }
