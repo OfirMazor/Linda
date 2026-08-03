@@ -16,7 +16,8 @@
       "Bash(npx vite *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\ofirm\\.linda-local\\client\\src\\auth"

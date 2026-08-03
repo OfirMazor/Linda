@@ -115,11 +115,6 @@ export default function Container2({
         </div>
       </div>
 
-      {selectedBlock && (
-        <div className="active-block-badge">
-          Active: Block {selectedBlock.Name} (ID: {selectedBlock.ObjectID})
-        </div>
-      )}
 
       {error && (
         <div className="filter-error">

@@ -9,8 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Environment
 
 - **Platform**: Windows 11
-- **Project directory**: `C:\Users\ofirm\Desktop\Linda` — this is the sole location for all project files, `node_modules`, and dev servers.
-- **No git repository**
+- **Project directory**: `C:\Users\ofirm\Desktop\Linda`
+- **Git repository**: GitHub (`OfirMazor/Linda`), active branch: `Agent`, stable: `main`
 - **No test framework or linter** is currently configured.
 
 ## Commands
@@ -114,13 +114,19 @@ Server requires `server/.env` (see `.env.example` at root):
 
 ## Specification
 
-Full requirements in `docs/Specification & Documentation-Linda.docx` (binary .docx — read with `python-docx` if needed).
+Full requirements in `.claude/docs/Specification & Documentation-Linda.docx` (binary .docx — read with `python-docx` if needed).
+Database schema reference in `.claude/docs/Database Schema/Israel National Cadaster Database Schema.sql`.
 
 ## Apply changes
 
-Whenever the app’s build command is executed—whether manually by me or independently by the Claude agent—the following steps must always be performed:
-1.Build the application using the development/source files.
-2.Update the client files (the dist folder) with the results of the build.
-3.Commit and push all changes to the Git repository on the Agent branch.
+Whenever the app's build command is executed—whether manually by me or independently by the Claude agent—the following steps must always be performed:
+1. Build the application using the development/source files.
+2. Stage all changed files (source code, config, skills — NOT `client/dist/` which is gitignored).
+3. Commit and push all changes to the Git repository on the Agent branch.
 
-The custom build command should execute these steps automatically without asking for my permission or confirmation each time.
+The `/rockNroll` command executes these steps automatically without asking for permission or confirmation.
+
+## Permissions
+The following command list can run entirely without asking for approval:
+- /rockNroll
+- npm run build 2>&1

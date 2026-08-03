@@ -38,11 +38,11 @@ export default function App() {
         onLogout={logout}
       />
       <main className="dashboard">
-        <Container1 selectedBlock={selectedBlock} />
         <Container2
           onBlockSelected={setSelectedBlock}
           selectedBlock={selectedBlock}
         />
+        <Container1 selectedBlock={selectedBlock} />
         {selectedBlock && (
           <Container3
             block={selectedBlock}
