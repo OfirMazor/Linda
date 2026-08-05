@@ -130,3 +130,4 @@ The `/rockNroll` command executes these steps automatically without asking for p
 The following command list can run entirely without asking for approval:
 - /rockNroll
 - npm run build 2>&1
+- git push origin Agent

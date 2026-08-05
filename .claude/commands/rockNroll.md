@@ -1,6 +1,6 @@
 Build, commit, and push the Linda app to the Agent branch.
 
-Steps:
+Workflow steps:
 1. Run `npm run build` from the project root to build both client and server.
 2. If the build fails, fix the issue and retry.
 3. Stage all changed files (source + built output in `client/dist/`).

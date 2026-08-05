@@ -17,7 +17,10 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git mv *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\ofirm\\.linda-local\\client\\src\\auth"
